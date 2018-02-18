@@ -1,0 +1,252 @@
+<template name="documentSettings">
+  <div class="document-settings" id="document-settings">
+    <div class="left-block">
+      <div class="ui form">
+        {{#if viewinfo}}
+          <div class="ui small header">original name
+            <div class="ui header" style="word-break: break-all;">{{viewinfo.originalTitle}}</div>
+          </div>
+          
+          <div class="ui small header">File title
+            <div class="sub header">{{viewinfo.title}}</div>
+          </div>
+          <div class="ui small header">Folder type
+            <div class="sub header">{{displayFolderType viewinfo.folderId}}</div>
+          </div>
+
+          {{#if viewinfo.period}}
+          <div class="ui small header">period
+            <div class="sub header">{{viewinfo.period}}/{{viewinfo.year}}</div>
+          </div>
+          {{/if}}
+
+            {{#if viewinfo.meta.comment.text}}
+            <div class="ui small header">Comments
+              <div class="sub header">{{viewinfo.meta.comment.text}}</div>
+            </div>
+           {{/if}}
+          
+          {{#if viewinfo.meta.balance}}
+            <div class="ui small header">Balance
+              <div class="sub header">{{viewinfo.meta.balance}}</div>
+            </div>
+          {{/if}}
+          <!--{{#if viewinfo.meta.fileType}}
+            <div class="ui small header">File Type
+              <div class="sub header">{{viewinfo.meta.fileType}}</div>
+            </div>
+          {{/if}}-->
+          {{#if viewinfo.meta.fileSizeKB}}
+            <div class="ui small header">File SizeKB
+              <div class="sub header">{{viewinfo.meta.fileSizeKB}}</div>
+            </div>
+          {{/if}}
+          
+           
+          
+          <div class="two fields">
+              <div class="field">
+                <button class="ui basic button js-ds-cancel">Cancel</button>
+              </div>
+          </div>
+        {{else if EditInfo}}
+            <form id="editInfo_Frm" class="field">
+              <div class="ui header" style="word-break: break-all;">Original name: {{EditInfo.title}} </div>
+    
+                {{#if folderType}}
+                <input id="newTitle" value={{EditInfo.originalTitle}}/>
+                {{/if}}
+            
+              <div class="field">
+                  <label>File title</label>
+                  <div class="sub header" id="fileTitle">
+                    {{EditInfo.title}}
+                  </div>
+              </div>
+              
+              <!--{{#if EditInfo.period}}
+              <div class="field">
+                  <label>Period</label>
+                  <input type="text" id="period" placeholder="Period" name="period" value={{EditInfo.period}}>
+              </div>
+              {{/if}}-->
+              {{#if EditInfo.periodId}}
+                <div class="field">
+                  <select name="states" class="ui selection dropdown multi-select" multiple="" id="multi-select">
+                    <option value="">Select Period</option>
+                      {{#each option in selectOptionsEdit}}
+                        <option value={{option.periodTemplateId}}>{{option.text}}</option>
+                      {{/each}}
+                  </select>
+                </div>   
+              {{/if}}
+              
+              {{#if EditInfo.meta.balance}}
+                <div class="field">
+                    <label>Balance</label>
+                    <input type="text" id="balance" placeholder="Balance" name="balance" value={{EditInfo.meta.balance}}>
+                </div>
+              {{/if}}
+              </form>
+              <div class="field">
+                <div class="two fields">
+                    <div class="field">
+                      <button class="ui basic button js-ds-cancel">Cancel</button>
+                    </div>
+                    <div class="field">
+                      <button class="ui basic button js-ds-Update">Update</button>
+                    </div>
+                </div>
+              </div>
+        {{else if DeleteFile}}
+            <p>File name: {{DeleteFile.originalTitle}}</p>
+            <div class="field">
+              <label>Reason for delete file.</label>
+              <input type="text"  name="reason" id="reason" />
+              <span style="color:red" id="reasonErrorDelete"></span>
+            </div>
+            <div class="two fields">
+                  <div class="field">
+                    <button class="ui basic button js-ds-cancel">Cancel</button>
+                  </div>
+                  <div class="field">
+                    <button class="ui red button js-ds-Delete">Delete</button>
+                  </div>
+            </div>
+        {{else if DeleteFromSubmited}}
+            <p>{{DeleteFromSubmited.originalTitle}} will be permanently deleted from Fortress.</p>
+            <div class="two fields">
+            <div class="field">
+              <button class="ui basic button js-ds-cancel">Cancel</button>
+            </div>
+            <div class="field">
+              <button class="ui red button js-ds-DeleteSubmited">Delete</button>
+            </div>
+            </div>
+        {{else if RestoreFile}}
+            <p>{{RestoreFile.originalTitle}} will be restore from Archive.</p>
+            <div class="field">
+              <label>Reason for restore file.</label>
+              <input type="text"  name="reason" id="restoreReason" />
+              <span style="color:red" id="restoreErrorDelete"></span>
+            </div>
+            <div class="two fields">
+            <div class="field">
+              <button class="ui basic button js-ds-cancel">Cancel</button>
+            </div>
+            <div class="field">
+              <button class="ui red button js-ds-RestoreSubmited">Restore</button>
+            </div>
+            </div>
+        {{else}}
+          {{#if folder}}
+            <form id="jsdssave" role="form">
+              <div>
+                <p>Folder type: {{displayFolderType}}</p>
+                </div>
+              {{#if $equal folder.type 'account'}}
+              <div class="ui header" style="word-break: break-all;">
+                {{file.originalTitle}}
+                {{#if newFileName.isLoaded}}
+                  <div class="sub header" id="fileTitle">
+                    {{newFileName.newName}}
+                  </div>
+                {{/if}}
+              </div>
+              <div class="ui small header">Selected Folder
+                <div class="sub header">{{folder.title}}</div>
+              </div>
+                {{#if $equal folder.type 'account'}}
+                  <div class="field">
+                    <select name="states" class="ui selection dropdown" multiple="" id="multi-select">
+                      <option value="">Select Period</option>
+                        {{#each option in selectOptions}}
+                          <option value={{option.periodTemplateId}}>{{option.text}}</option>
+                          <!--   -->
+                        {{/each}}
+                    </select>
+                  </div>              
+                  <div class="field">
+                    <label>Balance</label>
+                    <input type="text" id="fileBalance" placeholder="Balance" >
+                  </div>
+                {{/if}}
+                {{else if $equal folder.type 'detail'}}
+                  <div class="ui header" style="word-break: break-all;">{{file.originalTitle}}
+                    <input type="text" class="sub header" id="fileTitle" value={{file.title}} >
+                  </div>
+                  <div class="ui small header">Selected Folder
+                    <div class="sub header">{{folder.title}}</div>
+                  </div>
+                  <div class="field">
+                    <label>Issue/Aquired Date</label>
+                    <input type="text" placeholder="MM/DD/YYYY" value={{file.meta.issueDate}} id="folder-issue-date">
+                  </div>
+                  <div class="field">
+                    <label>Expired/Disposed Date</label>
+                    <input type="text" placeholder="MM/DD/YYYY" value={{file.meta.expireDate}} id="folder-expire-date">
+                  </div>
+                  <div class="field">
+                    <label>Balance</label>
+                    <input type="text" id="fileBalance" placeholder="Balance" value={{file.meta.balance}}>
+                  </div>
+                  <div class="field">
+                    <label>Comment</label>
+                    <input type="text" name="detailComment" id="detailComment" placeholder="Comment" value={{file.meta.comment.text}}>
+                  </div>
+                {{else if $equal folder.type 'support'}}
+                  <div class="ui header" style="word-break: break-all;">{{file.originalTitle}}
+                    <input type="text" class="sub header" id="fileTitle" value={{file.title}} >
+                  </div>
+                  <div class="ui small header">Selected Folder
+                    <div class="sub header">{{folder.title}}</div>
+                  </div>
+              {{/if}}
+              {{#if moveFile}}
+                <div class="field">
+                    <label>Reason for move file.</label>
+                    <input type="text"  name="reason" id="reason">
+                    <span style="color:red" id="reasonError"></span>
+                  </div>
+              {{/if}}
+              <div class="field confirm">
+                <div class="ui checkbox js-confirm-remove">
+                  <input type="checkbox" tabindex="0" class="hidden">
+                  <label>Confirm you are moving shown documents to folder "{{folder.title}}"</label>
+                </div>
+              </div>
+              <div class="two fields">
+              <div class="field">
+                <button type="reset" class="ui basic button js-ds-cancel">Cancel</button>
+              </div>
+              <div class="field">
+                <input type="submit" form="jsdssave" class="ui basic right floated button js-ds-save" {{confirmRemove}} value="Save" />
+              </div>
+            </div>
+            </form>
+            
+          {{else}}
+            <div class="ui header"  style="word-break: break-all;">
+            {{file.originalTitle}}
+            </div>
+            <div class="field">
+              <p>Please select folder</p>
+            </div>
+            <div class="two fields">
+              <div class="field">
+                <button class="ui basic button js-ds-cancel">Cancel</button>
+              </div>
+              <div class="field">
+              </div>
+            </div>
+          {{/if}}
+        {{/if}}
+      </div>
+      
+    </div>
+    <div class="pdf-viewer">
+         <div>{{file.originalTitle}}</div>
+         <iframe src={{src}} style="width:100%; height:100%"></iframe>
+    </div>
+  </div>
+</template>

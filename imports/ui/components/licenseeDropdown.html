@@ -1,0 +1,23 @@
+<template name="licenseeDropdown">
+  {{#unless isAdmin}}
+    <div class="ui large inverted center aligned header">
+      <div id="licenseeDropdown" class="ui dropdown inline item">
+        {{showName}}
+        <div class="menu">
+          <div class="item">
+            <span class="item js-licensee-dropdown" id={{currentUser._id}}>{{currentUser.profile.firstName}} {{currentUser.profile.lastName}}</span>
+          </div>
+          {{#each licensees}}
+          <div class="item">
+            <span class="js-licensee-dropdown" id={{this.id}}>{{this.name}}</span>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  {{else}}
+   <div class="ui large inverted center aligned header">
+      {{showName}}
+   </div>
+  {{/unless}}
+</template>

@@ -1,0 +1,134 @@
+<template name="modalEdit">
+  <div class="ui modal small editFolder" id="editFolderModal">
+    {{> modalEditFolderForm}}
+  </div>
+</template>
+
+<template name="modalEditFolderForm">
+  <div class="content">
+    <form id="form-modal-edit" class="ui form">
+      <h4 class="ui dividing header"></h4>
+      <div class="two fields">
+        <div class="field">
+          <label>Folder Name</label>
+          <input type="text" name="folder-name" id="edit-folder-name" class="folderName" value={{folder.title}}>
+          <span style="color:red" class="Editerror"></span>
+        </div>
+        {{#if $equal folder.type 'account'}}
+          <div class="field">
+            <label>Base File Name</label>
+            <input type="text" name="file-name" id="edit-file-name" value={{folder.staticString.title}}>
+          </div>
+        {{/if}}
+      </div>
+
+      <!-- Datepicker -->
+<!--       <div class="two fields">
+        <div class="field">
+          <label>Account opened</label>
+          <input type="text" class="form-control" name="account-opened-edit" id="account-opened-edit" value={{folder.accountOpened}}>
+        </div>
+        <div class="field">
+          <label>Account closed</label>
+          <input type="text" class="form-control" name="account-closed-edit" id="account-closed-edit" value={{folder.accountClosed}}>
+        </div>
+      </div>
+ -->
+      <div class="field">
+          <label>Comment</label>
+          <textarea rows="2" name="comment" id="comment" value={{folder.comment}}></textarea>
+      </div>
+
+      {{#if $equal folder.type 'account'}}
+        <div class="field" style="text-align: center;">
+          <label>Account opened</label>
+          <span class="errorEditDate" style="color:red"></span>
+        </div>
+      <div class="three fields" style="width: 50%;margin: 0 auto;">
+        <div class="field" style="width: 30%;">
+          <input type="text" name="accountopenedmm" placeholder="mm" id="edit-folder-open-mm" value={{folder.opened.mm}}>
+        </div>
+        <div class="field" style="width: 30%;">
+          <input type="text" name="accountopeneddd" placeholder="dd" id="edit-folder-open-dd" value={{folder.opened.dd}}>
+        </div>
+        <div class="field" style="width: 40%;">
+          <input type="text" name="accountopenedyy" placeholder="yyyy" id="edit-folder-open-yy" value={{folder.opened.yy}}>
+        </div>
+      </div>
+      <br>
+        <div class="field" style="text-align: center;">
+          <label>Account closed</label>
+          <span class="errorEditCloseDate" style="color:red"></span>
+        </div>
+      <div class="three fields" style="width: 50%;margin: 0 auto;">
+        <div class="field" style="width: 30%;">
+          <input type="text" name="accountclosedmm" placeholder="mm" id="edit-folder-closed-mm" value={{folder.closed.mm}}>
+        </div>
+        <div class="field" style="width: 30%;">
+          <input type="text" name="accountcloseddd" placeholder="dd" id="edit-folder-closed-dd" value={{folder.closed.dd}}>
+        </div>
+        <div class="field" style="width: 40%;">
+          <input type="text" name="accountclosedyy" placeholder="yyyy" id="edit-folder-closed-yy" value={{folder.closed.yy }}>
+        </div>
+      </div>
+      <br>
+      <div class="field" style="width: 50%;margin: 0 auto;">
+        <select name="frequently" id="edit-frequently" class="js-editModal-select">
+          <option value="month">Month</option>
+          <option value="quarter">Quarter</option>
+          <option value="annual">Year</option>
+        </select>
+      </div>
+      <br/>
+
+
+      {{else if $equal folder.type 'detail'}}
+        <div class="field" style="text-align: center;">
+          <label>Issue Date</label>
+        </div>
+        <div class="three fields" style="width: 50%;margin: 0 auto;">
+          <div class="field" style="width: 30%;">
+            <input type="text" name="accountopenedmm" placeholder="mm" id="edit-folder-open-mm" value={{folder.opened.mm}}>
+          </div>
+          <div class="field" style="width: 30%;">
+            <input type="text" name="accountopeneddd" placeholder="dd" id="edit-folder-open-dd" value={{folder.opened.dd}}>
+          </div>
+          <div class="field" style="width: 40%;">
+            <input type="text" name="accountopenedyy" placeholder="yyyy"  id="edit-folder-open-yy" value={{folder.opened.yy}}>
+          </div>
+        </div>
+        <br>
+        <div class="field" style="text-align: center;">
+          <label>Expire date</label>
+        </div>
+        <div class="three fields" style="width: 50%;margin: 0 auto;">
+          <div class="field" style="width: 30%;">
+            <input type="text" name="accountclosedmm" placeholder="mm"  id="edit-folder-closed-mm" value={{folder.closed.mm}}>
+          </div>
+          <div class="field" style="width: 30%;">
+            <input type="text" name="accountcloseddd" placeholder="dd" id="edit-folder-closed-dd" value={{folder.closed.dd}}>
+          </div>
+          <div class="field" style="width: 40%;">
+            <input type="text" name="accountclosedyy" placeholder="yyyy" id="edit-folder-closed-yy" value={{folder.closed.yy}}>
+          </div>
+        </div>
+      {{else if $equal folder.type 'support'}}
+      {{/if}}
+
+      <div class="field">
+        <div class="actions">
+          <div class="ui grid">
+            <div class="two column row" style="margin-left: 0;">
+              <div class="column left aligned">
+                <div class="ui cancel button">Cancel</div>
+              </div>
+              <div class="column right aligned">
+                <input type="submit" form="form-modal-edit" class="ui button blue js-modalEdit-save" value="Save" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>

@@ -1,0 +1,13 @@
+/node_modules
+*.log
+*.DS_Store
+.idea/
+.meteor/dev_bundle
+.uploads
+<<<<<<< HEAD
+imports/ui/components/tabPanels/document-settings\.js
+.meteor/packages
+.meteor/versions
+=======
+.vscode
+>>>>>>> heroku-dev

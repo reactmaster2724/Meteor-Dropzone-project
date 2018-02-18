@@ -1,0 +1,46 @@
+<template name="header">
+    <div class="ui big transparent left icon input search">
+      <input type="text" id="search_for_files_field" placeholder="Search with filename">
+      <i class="search icon"></i>
+    </div>
+
+    <div class="df">
+      <div id="userMenu" class="ui pointing dropdown top right">
+        <div class="right">{{avatar}}</div>
+        <div class="left menu">
+          <a href="#" class="item js-logout">Sign Out</a>
+          <div class="{{isActiveRoute 'changepwd'}}">
+            <a href="{{pathFor 'changepwd'}}" class="btn-secondary js-changePwd">{{_ 'Change Password'}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="ui secondary pointing large menu" id="header-menu">
+      <a href="" class="icon item"><i class="content icon"></i></a>
+      <a href="#financialDashboard" class="item active js-tab-header" aria-controls="financialDashboard" role="tab" data-toggle="tab">
+        Financial Dashboard
+      </a>
+      <a href="#personalDashboard" class="item js-tab-header" aria-controls="personalDashboard" role="tab" data-toggle="tab">
+        Personal Dashboard
+      </a>
+      <a href="#documents" class="item js-tab-header js-documents-tab" aria-controls="documents" role="tab" data-toggle="tab">
+        Documents
+      </a>
+      <a href="#submitDocuments" class="item js-tab-header js-submitDocuments-tab" aria-controls="submitDocuments" role="tab" data-toggle="tab">
+        Submit Documents
+      </a>
+      {{#if isSU}}
+        <a href="#administration" class="item js-tab-header js-admin-tab" aria-controls="administration" role="tab" data-toggle="tab">
+          Administration
+        </a>
+      {{/if}}
+       <a href="#search" class="item js-tab-header js-search-tab" aria-controls="search" role="tab" data-toggle="tab">
+        {{#if SearchisActive}}
+          Search Results
+        {{/if}}
+      </a>
+      
+      
+    </nav>
+</template>

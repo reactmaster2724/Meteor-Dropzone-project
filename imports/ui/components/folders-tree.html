@@ -1,0 +1,36 @@
+<template name="foldersTree">
+  <div class="foldersJstree">
+    <!--{{#if $or ($equal view 'documents') ($equal view 'submitDocuments')}}-->
+    {{#if view}}
+      <p>Financial</p>
+      {{> foldersTreeF}}
+      <p>Personal</p>
+      {{> foldersTreeP}}
+    <!--{{else}}
+      {{#if $equal view 'search'}}
+        <p>Financial</p>
+        {{> foldersTreeF}}
+        <p>Personal</p>
+        {{> foldersTreeP}}
+       {{/if}}-->
+    {{/if}}
+
+
+    {{#if isAdmin}}
+      <p>Archive</p>
+      {{> foldersTreeA}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="foldersTreeF">
+  <div id="jstree_div_financial"></div>
+</template>
+
+<template name="foldersTreeP">
+  <div id="jstree_div_personal"></div>
+</template>
+
+<template name="foldersTreeA">
+  <div id="jstree_div_archive"></div>
+</template>

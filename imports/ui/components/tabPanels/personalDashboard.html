@@ -1,0 +1,101 @@
+<template name="personalDashboard">
+  <div>
+    <br>
+    <div>
+      <table class="fortress-table">
+        <thead>
+           <tr>
+              <th colspan="4"></th>
+             <th colspan="12" scope="colgroup" ><a href="" class="icon item prevYear left"><i class="fa fa-chevron-left"></i></a><span class="center" style="margin-left: 39%">{{currentYear}}</span>
+              <input type="checkbox" class="tableCheckbox">
+            </th>
+            <th colspan="12" scope="colgroup" ><span style="margin-left: 40%">{{nextYear}}</span><a href="" class="icon item nextYear right" style="float:right"><i class="fa fa-chevron-right"></i></a>
+              <input type="checkbox" class="tableCheckbox">
+            </th>
+           </tr>
+           <tr class="per-row">
+            <th class="no-row">Personal Information Checklist</th>
+            <th class="no-row">Issued/Updated</th>
+            <th class="no-row">Expiration</th>
+            <th class="no-row">Doc</th>
+
+            <th scope="col">Jan</th>
+            <th scope="col">Feb</th>
+            <th scope="col">Mar</th>
+            <th scope="col">Apr</th>
+            <th scope="col">May</th>
+            <th scope="col">Jun</th>
+            <th scope="col">Jul</th>
+            <th scope="col">Aug</th>
+            <th scope="col">Sep</th>
+            <th scope="col">Oct</th>
+            <th scope="col">Nov</th>
+            <th scope="col">Dec</th>
+
+            <th scope="col">Jan</th>
+            <th scope="col">Feb</th>
+            <th scope="col">Mar</th>
+            <th scope="col">Apr</th>
+            <th scope="col">May</th>
+            <th scope="col">Jun</th>
+            <th scope="col">Jul</th>
+            <th scope="col">Aug</th>
+            <th scope="col">Sep</th>
+            <th scope="col">Oct</th>
+            <th scope="col">Nov</th>
+            <th scope="col">Dec</th>
+           </tr>
+        </thead>
+
+        <tbody>
+          {{#each folderTemplate in folderTemplates}}
+            <tr>
+              <th style="border-right: none;">
+                <input type="checkbox" class="tableCheckbox">
+                {{folderTemplate.shortDescription}}
+              </th>
+              <td colspan="30" style="border-left: none"></td>
+            </tr>
+            {{#each folder in folders folderTemplate._id }}
+               <tr>
+                  <th scope="row" id={{folder._id}} style="padding-left: 14px;">
+                    <input type="checkbox" class="tableCheckbox">
+                    {{folder.title}}
+                  </th>
+                  <td>{{accountOpened folder}}</td>
+                  <td>{{accountClosed folder}}</td>
+                  <td style="background: {{docColor folder}}">{{#if docColorUrl folder}}<a href="{{docColorUrl folder}}" class="viewDoc" target="_blank" style="display: block;">&nbsp;</a>{{/if}}</td>
+                  {{#if $equal folder.periodType "month"}}
+                    {{#each period in periodTemplate "month" folder}}
+                      <td id={{period._id}} style="background-color: {{period.color}}"></td>
+                    {{/each}}
+                  {{else if $equal folder.periodType "quarter"}}
+                    {{#each period in periodTemplate "quarter" folder}}
+                      <td colspan="3" id={{period._id}} style="background-color: {{period.color}}"></td>
+                    {{/each}}
+                  {{else if $equal folder.periodType "annual"}}
+                    {{#each period in periodTemplate "annual" folder}}
+                      <td colspan="12" id={{period._id}} style="background-color: {{period.color}}"></td>
+                    {{/each}}
+                  {{/if}}
+               </tr>
+             {{/each}}
+            {{/each}}
+          </tbody>
+      </table>
+    </div>
+    <br>
+
+    <div class='my-legend'>
+      <div class='legend-scale'>
+        <ul class='legend-labels'>
+          <li><span style='background:yellow;'></span>Document Expires</li>
+          <li>  <span style='background:green;'></span>Document available</li>
+          <li>  <span style='background:red;'></span>Missing Document</li>
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+</template>

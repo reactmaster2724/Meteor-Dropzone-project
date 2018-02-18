@@ -1,0 +1,137 @@
+<template name="modalNew">
+  <div class="ui modal small newFolder" id="newFolderModal">
+    {{> modalNewFolderForm}}
+  </div>
+</template>
+
+<template name="modalNewFolderForm">
+  <div class="content">
+    <form id="form-modal" class="ui form">
+      <h4 class="ui dividing header"></h4>
+
+      <div class="two fields">
+        <div class="field">
+          <label>Folder Name</label>
+          <input type="text" name="foldername" placeholder="Type folder name here" id="new-folder-name">
+          <span style="color:red" class="error"></span>
+        </div>
+        {{#if $equal modalType 'account'}}
+          <div class="field">
+            <label>Base File Name</label>
+            <input type="text" name="file-name" id="new-folder-file-name">
+          </div>
+        {{/if}}
+      </div>
+
+<!--       <div class="two fields">
+        <div class="field">
+          <label>Account opened</label>
+          <input type="text" class="form-control" name="account-opened" id="account-opened">
+        </div>
+        <div class="field">
+          <label>Account closed</label>
+          <input type="text" class="form-control" name="account-closed" id="account-closed" disabled>
+        </div>
+      </div>
+ -->
+        <div class="field">
+          <label>Comment</label>
+          <textarea rows="2" name="comment" id="comment"></textarea>
+        </div>
+     
+      {{#if $equal modalType 'account'}}
+
+        <div class="field" style="text-align: center;">
+          <label>Account opened</label>
+          <span class="errorDate" style="color:red"></span>
+        </div>
+        
+      <div class="three fields" style="width: 50%;margin: 0 auto;">
+        <div class="field" style="width: 30%;">
+          <input type="text" name="accountopenedmm" placeholder="mm" id="new-folder-open-mm">
+        </div>
+        <div class="field" style="width: 30%;">
+          <input type="text" name="accountopeneddd" placeholder="dd" id="new-folder-open-dd">
+        </div>
+        <div class="field" style="width: 40%;">
+          <input type="text" name="accountopenedyy" placeholder="yyyy"  id="new-folder-open-yy">
+        </div>
+      </div>
+      <br>
+        <div class="field" style="text-align: center;">
+          <label>Account closed</label>
+          <span class="errorCloseDate" style="color:red"></span>
+        </div>
+      <div class="three fields" style="width: 50%;margin: 0 auto;">
+        <div class="field" style="width: 30%;">
+          <input type="text" name="accountclosedmm" placeholder="mm"  id="new-folder-closed-mm" >
+        </div>
+        <div class="field" style="width: 30%;">
+          <input type="text" name="accountcloseddd" placeholder="dd" id="new-folder-closed-dd" >
+        </div>
+        <div class="field" style="width: 40%;">
+          <input type="text" name="accountclosedyy" placeholder="yyyy" id="new-folder-closed-yy">
+        </div>
+      </div>
+      <br>
+      
+      <div class="field" style="width: 50%;margin: 0 auto;">
+        <select name="frequently" id="frequently" class="js-newModal-select">
+          <option value="month">Month</option>
+          <option value="quarter">Quarter</option>
+          <option value="annual">Year</option>
+        </select>
+      </div>
+      <br>
+
+      {{else if $equal modalType 'detail'}}
+        <div class="field" style="text-align: center;">
+          <label>Issue Date</label>
+        </div>
+      <div class="three fields" style="width: 50%;margin: 0 auto;">
+        <div class="field" style="width: 30%;">
+          <input type="text" name="accountopenedmm"  placeholder="mm" id="new-folder-open-mm">
+        </div>
+        <div class="field" style="width: 30%;">
+          <input type="text" name="accountopeneddd" placeholder="dd" id="new-folder-open-dd">
+        </div>
+        <div class="field" style="width: 40%;">
+          <input type="text" name="accountopenedyy" placeholder="yyyy"  id="new-folder-open-yy">
+        </div>
+        
+      </div>
+      <br>
+        <div class="field" style="text-align: center;">
+          <label>Expire date</label>
+        </div>
+      <div class="three fields" style="width: 50%;margin: 0 auto;">
+        <div class="field" style="width: 30%;">
+          <input type="text" name="accountclosedmm" placeholder="mm"  id="new-folder-closed-mm">
+        </div>
+        <div class="field" style="width: 30%;">
+          <input type="text" name="accountcloseddd" placeholder="dd" id="new-folder-closed-dd">
+        </div>
+        <div class="field" style="width: 40%;">
+          <input type="text" name="accountclosedyy" placeholder="yyyy" id="new-folder-closed-yy">
+        </div>
+      </div>
+      {{else if $equal modalType 'support'}}
+      {{/if}}
+      
+      <div class="field">
+        <div class="actions">
+          <div class="ui grid">
+            <div class=" two column row" style="margin-left: 0;">
+              <div class="column left aligned">
+                <div class="ui cancel button">Cancel</div>
+              </div>
+              <div class="column right aligned">
+                <input type="submit" form="form-modal" class="ui button blue js-modal-save" value="Save" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>

@@ -1,0 +1,13 @@
+<template name="App_body">
+  {{#if currentUser}}
+    {{> Template.dynamic template=main}}
+  {{else}}
+    <div class='container'>
+      <div class="row">
+        <div class="col-md-6 cold-md-offset-3">
+          {{> atForm}}
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

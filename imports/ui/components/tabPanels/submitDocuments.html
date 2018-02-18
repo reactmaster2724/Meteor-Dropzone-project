@@ -1,0 +1,59 @@
+<template name="submitDocuments">
+  <div class="submitDocuments">
+    <div class="submit_files">
+
+ <div class="js-dropzone" >
+        {{> dropZone }}
+        <!--<input type="file" value="Drag File Here" id="UploadFile">-->
+    </div>
+
+      <div class="items block-view" style="overflow-y: auto;">
+        {{#if isAdmin}}
+           {{#each files}}
+             <div class="context-submit" data-toggle="context" data-target="#context-menu-submit">
+               {{> file}}
+             </div>
+           {{/each}}
+        {{else}}
+           {{#each files}}
+             {{> file }}
+           {{/each}}
+        {{/if}}
+
+      </div>
+    </div>
+    <br>
+
+<!--     <div class="panel panel-default pull-right col-md-8 js-panel-right hide">
+      <div class="panel-body">
+      {{#if folder}}
+        <p>Period type {{folder.periodType}}</p>
+        <select id="folderPeriodType">
+          <option value="">select</option>
+          {{#each folderPeriods}}
+            <option value={{periodTemplateId}}>{{text}}</option>
+          {{/each}}
+        </select>
+      {{else}}
+        <p>Please select a folder</p>
+      {{/if}}
+      </div>
+      <div class=" pull-right">
+      {{#if folder}}
+        <button type="submit" class="btn btn-primary js-panel-submit" {{disabled}} >Submit</button>
+      {{/if}}
+      <button type="button" class="btn btn-default js-panel-cancel">Cancel</button>
+      </div>
+    </div>
+ -->
+
+  </div>
+
+  <div id="context-menu-submit">
+    <ul class="dropdown-menu" role="menu">
+      <li><a tabindex="-1" href="#" class="js-file-contextmenu viewFile" id="submit-context-menu">Store</a></li>
+      <li><a tabindex="-1" href="#" class="delete-context-menu" >Delete</a></li>
+    </ul>
+  </div>
+
+</template>

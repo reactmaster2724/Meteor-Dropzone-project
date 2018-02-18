@@ -1,0 +1,115 @@
+<template name="financialDashboard">
+  <div>
+    <br>
+    <table class="fortress-table" border="1">
+    <thead>
+      <tr>
+        <td rowspan="2"></td>
+        <th colspan="12" scope="colgroup" ><a href="" class="icon item prevYear left"><i class="fa fa-chevron-left"></i></a><span class="center" style="margin-left: 39%">{{currentYear}}</span>
+          <input type="checkbox" class="tableCheckbox">
+        </th>
+        <th colspan="12" scope="colgroup" ><span style="margin-left: 40%">{{nextYear}}</span><a href="" class="icon item nextYear right" style="float:right"><i class="fa fa-chevron-right"></i></a>
+          <input type="checkbox" class="tableCheckbox">
+        </th>
+        <th colspan="2" scope="colgroup" style="text-align-last:center">Balance
+        </th>
+      </tr>
+      <tr class="same-row">
+        <th scope="col">Jan</th>
+        <th scope="col">Feb</th>
+        <th scope="col">Mar</th>
+        <th scope="col">Apr</th>
+        <th scope="col">May</th>
+        <th scope="col">Jun</th>
+        <th scope="col">Jul</th>
+        <th scope="col">Aug</th>
+        <th scope="col">Sep</th>
+        <th scope="col">Oct</th>
+        <th scope="col">Nov</th>
+        <th scope="col">Dec</th>
+
+        <th scope="col">Jan</th>
+        <th scope="col">Feb</th>
+        <th scope="col">Mar</th>
+        <th scope="col">Apr</th>
+        <th scope="col">May</th>
+        <th scope="col">Jun</th>
+        <th scope="col">Jul</th>
+        <th scope="col">Aug</th>
+        <th scope="col">Sep</th>
+        <th scope="col">Oct</th>
+        <th scope="col">Nov</th>
+        <th scope="col">Dec</th>
+
+        <th scope="col" class="no-row">{{eoyStartYY}}</th>
+        <th scope="col" class="no-row">{{eoyCloseYY}}</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      {{#each section in sections}}
+        <tr>
+          <th style="border-right: none; background-color: #ccc;">{{section.name}}</th>
+          <td colspan="26" style="border-left: none; background-color: #ccc;"></td>
+        </tr>
+        {{#each folderTemplate in folderTemplates}}
+        {{#if $equal folderTemplate.section section.name}}
+          <tr>
+            <th style="border-right: none;">
+            <input type="checkbox" class="tableCheckbox">
+              {{folderTemplate.shortDescription}}
+            </th>
+            <td colspan="26" style="border-left: none"></td>
+          </tr>
+          {{#each folder in folders folderTemplate._id }}
+            <tr>
+              <th scope="row" id={{folder._id}} style="padding-left: 14px;">
+                <input type="checkbox" class="tableCheckbox">
+                {{folder.title}}
+              </th>
+              {{#if $equal folder.periodType "month"}}
+                {{#each period in periodTemplate "month" folder}}
+                {{#if period.fileId}}
+                  <td id={{period._id}} fileId={{period.fileId}} style="background-color: {{period.color}}"><a  data-taggroup={{period.fileId}} class="viewDoc" target="_blank" style="display: block;">&nbsp;</a></td>
+                {{else}}
+                  <td id={{period._id}} fileId={{period.fileId}} style="background-color: {{period.color}}"></td>
+                {{/if}}
+                {{/each}}
+              {{else if $equal folder.periodType "quarter"}}
+                {{#each period in periodTemplate "quarter" folder}}
+                {{#if period.fileId}}
+                  <td colspan="3" id={{period._id}} style="background-color: {{period.color}}"><a data-taggroup={{period.fileId}} target="_blank" class="viewDoc" style="display: block;">&nbsp;</a></td>
+                 {{else}}
+                  <td colspan="3" id={{period._id}} style="background-color: {{period.color}}"></td>
+                 {{/if}}
+                {{/each}}
+              {{else if $equal folder.periodType "annual"}}
+                {{#each period in periodTemplate "annual" folder}}
+                {{#if period.fileId}}
+                  <td colspan="12" id={{period._id}} style="background-color: {{period.color}}"><a data-taggroup={{period.fileId}} class="viewDoc" target="_blank"  style="display: block;">&nbsp;</a></td>
+                  {{else}}
+                  <td colspan="12" id={{period._id}} style="background-color: {{period.color}}"></td>
+                   {{/if}}
+                {{/each}}
+              {{else}}
+                <td colspan="12" class="white"></td>
+              {{/if}}
+              {{#if $equal folder.type "account"}}
+                <td>{{findBalanceF folder}}</td>
+                <td>{{findBalanceS folder}}</td>
+              {{else if $equal folder.type "detail"}}
+                <td>{{viewBalanceF folder}}</td>
+                <td>{{viewBalanceS folder}}</td>
+              {{else}}
+                <td colspan="2"></td>
+              {{/if}}
+            </tr>
+          {{/each}}
+          {{/if}}
+        {{/each}}
+      {{/each}}
+    </tbody>
+    </table>
+  </div>
+</template>

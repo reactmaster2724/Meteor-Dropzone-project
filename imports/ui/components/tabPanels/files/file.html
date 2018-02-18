@@ -1,0 +1,106 @@
+<template name="file">
+  {{#if originalTitle}}
+  <div class="item file" id={{_id}}>
+    <a  class="viewDoc viewFile" target="_blank">
+      <div class="name">
+        {{topTitle}}
+      </div>
+      <div class="type">
+        <i class="{{fileTYpe originalTitle}} icon custom"></i>
+      </div>
+      <div class="original-name">
+        {{bottomTitle}}
+      </div>
+    </a>
+    <div class="actions">
+      {{#if HeaderData}}
+      <a tabindex="-1" href="#" class="js-file-contextmenu" id="submit-context-menu"><i class="info icon custom"></i></a>      {{else}}
+      <!--<a href="#"><i class="info icon custom"></i></a>-->
+      {{/if}}
+      <a download class="downloadFile" id="downloadFile"><i class="download icon custom"></i></a>
+      <a   target="_blank" class="viewFile"><i class="view icon custom" ></i></a>
+    </div>
+  </div>
+    <!-- <div class="item file" id={{_id}}>
+        <a href="{{url}}" target="_blank">
+          <div class="name">
+            {{topTitle}}
+          </div>
+          <div class="type">
+              <i class="{{fileTYpe originalTitle}} icon custom"></i>
+          </div>
+          <div class="original-name">
+            {{bottomTitle}}
+          </div>
+        </a>
+        <div class="actions">
+          {{#if HeaderData}}
+            <a tabindex="-1" href="#" class="js-file-contextmenu" id="submit-context-menu"><i class="info icon custom"></i></a>
+          {{else}}
+          {{/if}}
+          <a href="{{url}}"  target="_blank"><i class="download icon custom"></i></a>
+        </div>
+       </div> -->
+       <!--download-->
+  {{/if}}
+
+  <!--{{#unless originalTitle}}
+    <a href="#">
+    <div class="item file folderData" id={{_id}}>
+        <div class="name">
+          {{topTitle}}
+        </div>
+        <div class="type">
+              <i class="folder icon custom"></i>
+        </div>
+        <div class="original-name">
+          {{bottomTitle}}
+        </div>
+      <div class="actions">
+      </div>
+    </div>
+    </a>
+  {{else}}
+      <div class="item file" id={{_id}}>
+        <a href="{{url}}" target="_blank">
+          <div class="name">
+            {{topTitle}}
+          </div>
+          <div class="type">
+              <i class="{{fileTYpe originalTitle}} icon custom"></i>
+          </div>
+          <div class="original-name">
+            {{bottomTitle}}
+          </div>
+        </a>
+        <div class="actions">
+          {{#if HeaderData}}
+            <a tabindex="-1" href="#" class="js-file-contextmenu" id="submit-context-menu"><i class="info icon custom"></i></a>
+          {{else}}
+            <a href="#"><i class="info icon custom"></i></a>
+          {{/if}}
+          <a href="{{url}}" download target="_blank"><i class="download icon custom"></i></a>
+        </div>
+       </div>
+  {{/unless}}-->
+</template>
+
+<template name="folder">
+  {{#if parentId}}
+  <a href="#">
+    <div class="item file folderData" id={{_id}}>
+      <div class="name">
+        {{topTitle}}
+      </div>
+      <div class="type">
+        <i class="folder icon custom"></i>
+      </div>
+      <div class="original-name">
+        {{bottomTitle}}
+      </div>
+      <div class="actions">
+      </div>
+    </div>
+  </a>
+  {{/if}}
+</template>

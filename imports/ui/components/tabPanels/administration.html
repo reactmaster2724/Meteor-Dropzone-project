@@ -1,0 +1,81 @@
+<template name="administration">
+  <br>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#folderTemplates" class="js-tab-administration js-folderTemplates-tab" aria-controls="folderTemplates" role="tab" data-toggle="tab">Folder Templates</a>
+    </li>
+
+    {{#unless isSU}}
+    <li role="presentation">
+      <a href="#users" class="js-tab-administration  js-users-tab" aria-controls="users" role="tab" data-toggle="tab">Users</a>
+    </li>
+    {{/unless}}
+
+
+    <li role="presentation">
+      <a href="#periods" class="js-tab-administration js-periods-tab" aria-controls="periods" role="tab" data-toggle="tab">Periods</a>
+    </li>
+
+    <li role="presentation">
+      <a href="#licensee" class="js-tab-administration js-licensee-tab" aria-controls="licensee" role="tab" data-toggle="tab">Licensee</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="folderTemplates">
+      <div id="jsGrid_foldersTemplate"></div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="users">
+      <div class="pull-right">
+        <button type="button" class="btn btn-default js-show-deleted">
+            <i class="fa fa-user-times" aria-hidden="true"></i>
+          </button>
+      </div>
+      <div id="jsGrid_users"></div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="periods">
+      <div class="pull-left">
+        <br>
+        <button type="button" class="{{disabled}} btn btn-default js-generate-periods">
+            Generate periods for current year
+          </button>
+        <br />
+        <br />
+        <table class="table">
+          <tr>
+            <th>type</th>
+            <th>year</th>
+            <th>quarter</th>
+            <th>month</th>
+          </tr>
+
+          {{#each periodTemplates }} {{> periodTemplate}} {{/each}}
+
+        </table>
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="licensee">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          {{#if admin}}
+            {{admin.profile.firstName}} {{admin.profile.lastName}}
+          {{else}}
+            Staff
+          {{/if}}
+            <span class="caret"></span>
+          </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          {{#each admins}}
+          <li class="js-admin-dropdown"><a href="#" id={{_id}}>{{profile.firstName}} {{profile.lastName}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+      {{#with admin}} Assigned Licensee {{> assignedLicenseeGrid }} Un-assigned Licensee {{> unAssignedLicenseeGrid}} {{/with}}
+
+    </div>
+
+  </div>
+</template>

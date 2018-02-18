@@ -1,0 +1,100 @@
+<template name="documents">
+  <div class="ui secondary menu top-filters">
+    <div class="item viewer">
+      <a href="#"><i class="block layout icon"></i></a>
+      <a href="#"><i class="list layout icon"></i></a>
+    </div>
+    <div class="item">
+      &nbsp;&nbsp;
+    </div>
+    {{#if changeView}}
+      <div class="item">
+        <div class="ui radio checkbox">
+          <input type="radio" name="radio1" checked="checked" id="jsCheckbox" />
+          <label>Current Name</label>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui radio checkbox">
+          <input type="radio" name="radio1" />
+          <label>Original Name</label>
+        </div>
+      </div>
+    {{/if}}
+    <!-- <div class="item">
+      <a href="#" class="archive">Archive</a>
+    </div> -->
+    <div class="right menu">
+      <div class="item" id="open-activity-block">
+        Activity
+      </div>
+    </div>
+  </div>
+
+  {{#if changeView}}
+     <div class="items block-view">
+     {{#if isAdmin}}
+        {{#each files}}
+          <div class="context" data-toggle="context" data-target="#context-menu-move">
+            {{> file}}
+          </div>
+        {{/each}}
+        {{#each folders}}
+          <div class="context" data-toggle="context" data-target="#context-menu-move">
+              {{> folder}}
+          </div>
+        {{/each}}
+      {{else}}
+        {{#each files}}
+          {{> folder}}
+          {{> file}}
+        {{/each}}
+      {{/if}}
+
+    </div>
+  {{else}}
+    <div class="items list-view">
+      <table class="ui complex structured celled table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Original Name</th>
+            <th class="center">Period</th>
+            <th class="center">Year</th>
+            <th>Balance</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each files}}
+          <tr class="">
+            <td>{{title}}</td>
+            <td>{{originalTitle}}</td>
+            <td class="center">{{period}}</td>
+            <td class="center">{{year}}</td>
+            <td>{{meta.balance}}</td>
+            <td class="actions">
+              <a tabindex="-1" href="#" class="js-file-contextmenu" id="submit-context-menu"><i class="info icon custom"></i></a>  
+              <!--    
+              <a href="{{url}}"  download target="_blank" class="downloadFile"><i class="download icon custom"></i></a>
+              -->
+              <a   target="_blank" class="viewFileDoc" style="cursor: pointer"><i class="view icon custom" ></i></a>
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+  {{/if}}
+
+  <div id="context-menu-move">
+    <ul class="dropdown-menu" role="menu">
+      <li><a tabindex="-1" href="#" class="js-file-contextmenu viewFile">Move</a></li>
+      <li><a tabindex="-1" href="#" class="js-edit viewFile">Edit</a></li>
+      <li>{{#if restore}}<a tabindex="-1" href="#" class="js-restore viewFile">Restore</a>{{/if}}</li>
+      <li><a tabindex="-1" href="#" class="js-delete viewFile">Delete</a></li>
+      
+    </ul>
+  </div>
+
+</template>

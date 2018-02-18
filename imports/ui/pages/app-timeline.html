@@ -1,0 +1,61 @@
+<template name="App_timeline">
+
+  <header>
+    {{> licenseeDropdown}}
+    {{> header}}
+  </header>
+
+  <main class="ui equal width grid">
+
+    <div class="column left-sidebar" style="display: none;">
+      {{#if meReady}}
+          {{> leftSideBar}}
+      {{/if}}
+    </div>
+
+    <div class="column right-sidebar">
+
+      {{#if showDocumentSettings}}
+        {{> documentSettings}}
+      {{/if}}
+
+      <div class="tab-content">
+       <div role="tabpanel" class="tab-pane active" id="financialDashboard">{{> financialDashboard}}</div>
+        <div role="tabpanel" class="tab-pane" id="personalDashboard">{{> personalDashboard}}</div>
+        <div role="tabpanel" class="tab-pane" id="documents">{{> documents}}</div>
+        <div role="tabpanel" class="tab-pane" id="submitDocuments">{{> submitDocuments}}</div>
+        <div role="tabpanel" class="tab-pane" id="search">{{> search}}</div>
+         {{#if isSU}}
+          <div role="tabpanel" class="tab-pane" id="administration">{{> administration}}</div>
+        {{/if}}
+      </div>
+
+      {{> modalNew}}
+      {{> modalEdit}}
+
+    <div class="activity-block" id="activity-block">
+      <div class="bg"></div>
+      <div class="ui small header">Activity</div>
+      <div class="ui small header folder">Folder: {{folderName}}</div>
+      <div class="time-range">
+        <div class="ui mini input">
+          <input class="ui dateFrom" id="dateFrom" type="date"  />
+        </div>
+        <i class="minus icon"></i>
+        <div class="ui mini input">
+          <input type="date" class="dateTo" id="dateTo" placeholder="To"/>
+        </div>
+      </div>
+      {{#with userActive}}
+      {{/with}}
+      {{#each activitys}}
+      <div class="row">
+        <a href="#" class="ui">{{reason}} by {{userName}}</a>
+        <div class="date">At {{date}}</div>
+      </div>
+      {{/each}}
+    </div>
+
+    </div>
+  </main>
+</template>

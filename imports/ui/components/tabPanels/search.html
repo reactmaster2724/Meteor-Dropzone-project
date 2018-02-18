@@ -1,0 +1,37 @@
+<template name="search">
+   <div class="search">
+    <br>
+    <div>
+      <div class="items list-view">
+      <table class="ui complex structured celled table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Original Name</th>
+            <th class="center">Period</th>
+            <th class="center">Year</th>
+            <th>Balance</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each getQueriedFiles}}
+          <tr style="cursor: pointer" class="displayFolder">
+            <td>{{title}}</td>
+            <td>{{originalTitle}}</td>
+            <td class="center">{{period}}</td>
+            <td class="center">{{year}}</td>
+            <td>{{meta.balance}}</td>
+            <td class="actions">
+              <a tabindex="-1" href="#" class="js-file-contextmenu" id="submit-context-menu"><i class="info icon custom"></i></a>      
+              <a href="{{url}}"  download target="_blank" class="downloadFile"><i class="download icon custom"></i></a>
+              <a   target="_blank" class="viewFileDoc" style="cursor: pointer"><i class="view icon custom" ></i></a>
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+   </div>
+   </div>
+</template>

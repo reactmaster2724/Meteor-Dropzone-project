@@ -1,0 +1,85 @@
+{
+  "scripts": {
+    "dev": ". ./config/development/env.sh && meteor --settings ./config/development/settings.json -p $MPORT",
+    "pretest": "npm run lint --silent",
+    "tests": "meteor test --driver-package practicalmeteor:mocha",
+    "test-app-watch": "meteor test --full-app --driver-package practicalmeteor:mocha",
+    "lint": "eslint .",
+    "production": "meteor --settings settings-production.json"
+  },
+  "dependencies": {
+    "autoprefixer": "^6.7.7",
+    "babel-runtime": "https://registry.npmjs.org/babel-runtime/-/babel-runtime-6.18.0.tgz",
+    "bcrypt": "^0.8.7",
+    "changeset": "^0.2.1",
+    "faker": "^3.1.0",
+    "lodash": "^4.12.0",
+    "meteor-node-stubs": "^0.2.11",
+    "moment": "^2.13.0",
+    "selenium-download": "^2.0.10"
+  },
+  "devDependencies": {
+    "eslint": "^2.3.0",
+    "eslint-config-airbnb": "^6.1.0",
+    "eslint-plugin-meteor": "^3.0.1",
+    "eslint-plugin-react": "^4.0.0",
+    "autoprefixer": "^6.3.1"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "dependencies": {
+      "autoprefixer": "^6.7.7",
+      "babel-runtime": "https://registry.npmjs.org/babel-runtime/-/babel-runtime-6.18.0.tgz",
+      "bcrypt": "https://registry.npmjs.org/bcrypt/-/bcrypt-0.8.7.tgz",
+      "eslint": "^2.13.1",
+      "faker": "https://registry.npmjs.org/faker/-/faker-3.1.0.tgz",
+      "lodash": "https://registry.npmjs.org/lodash/-/lodash-4.12.0.tgz",
+      "moment": "https://registry.npmjs.org/moment/-/moment-2.13.0.tgz",
+      "selenium-download": "https://registry.npmjs.org/selenium-download/-/selenium-download-2.0.10.tgz"
+    },
+    "devDependencies": {
+      "eslint": "^2.3.0",
+      "eslint-config-airbnb": "^6.1.0",
+      "eslint-plugin-meteor": "^3.0.1",
+      "eslint-plugin-react": "^4.0.0",
+      "autoprefixer": "^6.3.1"
+    },
+    "eslintConfig": {
+      "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+      },
+      "plugins": [
+        "meteor"
+      ],
+      "extends": [
+        "airbnb/base",
+        "plugin:meteor/recommended"
+      ],
+      "rules": {
+        "meteor/eventmap-params": [
+          2,
+          {
+            "eventParamName": "event",
+            "templateInstanceParamName": "instance"
+          }
+        ],
+        "meteor/template-names": [
+          0
+        ]
+      }
+    },
+    "postcss": {
+      "plugins": {
+        "autoprefixer": {
+          "browsers": [
+            "last 2 versions"
+          ]
+        }
+      }
+    }
+  }
+}
